@@ -121,7 +121,10 @@ class CodeFlowHandler(BaseHandler):
         # If user is not admin and not part of a team or new, they need to join a team.
         # Redirect to the join team page here, if needed, before the user is created in the db.
         if self.needs_team(hasAdminRole, user, team_code):
-            self.redirect("/jointeam?upn=" + claims["upn"])
+            if "upn" in claims:
+                self.redirect("/jointeam?upn=" + claims["upn"])
+            else:
+                self.redirect("/jointeam")
             return
 
         # New user
@@ -162,6 +165,9 @@ class CodeFlowHandler(BaseHandler):
 
     # Figure out whether the user should be presented with the join team page.
     def needs_team(self, hasAdminRole, user, team_code):
+        # If teams are disabled, no checks needed
+        if not options.teams:
+            return False
         needsateam = False
         # Is the a member of a team, if not admin?
         if not hasAdminRole:
@@ -193,7 +199,10 @@ class CodeFlowHandler(BaseHandler):
         user.theme = options.default_theme
         user.last_login = datetime.now()
         user.logins = 1
-        if not self.is_admin(claims):
+        if team_code is None:
+            user.team = Team()
+            user.team.name = user.handle
+        else:
             user.team = Team.by_code(team_code)
         self.dbsession.add(user)
         return user
