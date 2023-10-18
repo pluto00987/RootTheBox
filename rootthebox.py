@@ -525,6 +525,9 @@ define("client_id", default="", group="azuread")
 define("tenant_id", default="common", group="azuread")
 define("client_secret", default="", group="azuread")
 define("redirect_url", default="http://localhost:8888/oidc", group="azuread")
+define("b2c", default=False, group="azuread")
+define("b2c_tenant_name", default="", group="azuread")
+define("b2c_policy", default="", group="azuread")
 
 # ReCAPTCHA
 define(
