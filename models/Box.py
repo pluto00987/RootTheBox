@@ -413,7 +413,7 @@ class Box(DatabaseObject):
                 self.category_id
             ).category
         flags_elem = ET.SubElement(box_elem, "flags")
-        flags_elem.set("count", "%s" % str(len(self.flags)))
+        flags_elem.set("count", "%s" % str(len(self.flags_all)))
         for flag in self.flags_all:
             flag.to_xml(flags_elem)
         hints_elem = ET.SubElement(box_elem, "hints")
