@@ -286,7 +286,7 @@ class Flag(DatabaseObject):
     @property
     def order(self):
         if not self._order:
-            self._order = self.box.flags.index(self) + 1
+            self._order = self.box.flags_all.index(self) + 1
         return self._order
 
     @order.setter
@@ -458,6 +458,7 @@ class Flag(DatabaseObject):
         flag_elem = ET.SubElement(parent, "flag")
         flag_elem.set("type", self._type)
         ET.SubElement(flag_elem, "name").text = self._name
+        ET.SubElement(flag_elem, "order").text = str(self._order)
         ET.SubElement(flag_elem, "token").text = self.token
         ET.SubElement(flag_elem, "description").text = self.description
         ET.SubElement(flag_elem, "capture_message").text = self.capture_message
