@@ -487,6 +487,9 @@
                                 <th> {{_("Name")}} </th>
                                 <th> {{_("Last Login")}} </th>
                                 <th> {{_("Expire")}} </th>
+                                {% if options.require_email %}
+                                <th> {{_("Email")}} </th>
+                                {% end %}
                                 {% if options.require_email and options.validate_email %}
                                 <th> {{_("Validation")}} </th>
                                 {% end %}
@@ -516,6 +519,9 @@
                                         <td class="shortcolumn"> {{_("Never")}} </td>
                                     {% end %}
                                     <td class="shortcolumn"> {%if user.expire %}{{user.expire}}{% else %}Never{% end %} </td>
+                                    {% if options.require_email %}
+                                        <td class="shortcolumn"> {{ user.email }} </td>
+                                    {% end %}
                                     {% if options.require_email and options.validate_email %}
                                         <td class="shortcolumn"> {{ user.is_email_valid() }} </td>
                                     {% end %}
