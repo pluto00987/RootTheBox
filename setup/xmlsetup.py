@@ -95,6 +95,7 @@ def create_levels(levels):
                 game_level.name = get_child_text(level_elem, "name")
                 game_level.description = get_child_text(level_elem, "description")
                 game_level.type = get_child_text(level_elem, "type")
+                game_level.locked = get_child_text(level_elem, "locked", 0)
                 game_level.reward = get_child_text(level_elem, "reward", 0)
                 game_level.buyout = get_child_text(level_elem, "buyout", 0)
                 if game_level.type == "level":
