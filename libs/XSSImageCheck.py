@@ -27,7 +27,7 @@ from libs.ValidationError import ValidationError
 MAX_AVATAR_SIZE = 1024 * 1024
 MIN_AVATAR_SIZE = 64
 IMG_FORMATS = ["png", "jpeg", "jpg", "gif", "bmp"]
-IMG_SIZE = [500, 250]
+IMG_SIZE = (500, 250)
 
 def is_xss_image(data):
     # str(char) works here for both py2 & py3
@@ -139,8 +139,9 @@ def save_avatar(path: str, image_data: bytes) -> str:
             os.unlink(image_path)
             
         image = Image.open(io.BytesIO(image_data))
-        cover = resizeimage.resize_cover(image, IMG_SIZE)
-        cover.save(image_path, image.format)
+        if image.size != IMG_SIZE:
+            image = resizeimage.resize_cover(image, IMG_SIZE)
+        image.save(image_path, image.format)
         return str(base_path)
         
     except Exception as e:
