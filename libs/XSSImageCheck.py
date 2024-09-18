@@ -11,6 +11,7 @@ http://jklmnn.de/imagejs/
 
 """
 
+import logging
 import io
 import os
 from random import randint, sample
@@ -140,6 +141,7 @@ def save_avatar(path: str, image_data: bytes) -> str:
             
         image = Image.open(io.BytesIO(image_data))
         if image.size != IMG_SIZE:
+            logging.info(f"Resizing {base_path} from {image.size} to {IMG_SIZE}")
             image = resizeimage.resize_cover(image, IMG_SIZE)
         image.save(image_path, image.format)
         return str(base_path)
