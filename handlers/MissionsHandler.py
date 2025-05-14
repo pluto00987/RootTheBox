@@ -314,7 +314,7 @@ class BoxHandler(BaseHandler):
         level_progress = old_div(
             len(user.team.level_flags(level.number)), float(len(level.flags))
         )
-        if level_progress == 1.0 and level not in user.team.game_levels:
+        if level_progress == 1.0:
             reward_dialog = ""
             if level._reward > 0:
                 user.team.set_score("level", level._reward + user.team.money)
@@ -354,8 +354,8 @@ class BoxHandler(BaseHandler):
         # Unlock next level if based on Game Progress
         next_level = GameLevel.by_id(level.next_level_id)
         if next_level and next_level not in user.team.game_levels:
-            if level_progress == 1.0 or (
-                next_level._type == "progress"
+            if (
+                next_level.type == "progress"
                 and level_progress * 100 >= next_level.buyout
             ):
                 msg = self.unlock_level(next_level, user)
