@@ -26,11 +26,11 @@ def send_email_message(to_addrs, message):
   try:
       if options.mail_port == 465:
           smtpObj = smtplib.SMTP_SSL(
-              options.mail_host, port=options.mail_port, timeout=5
+              options.mail_host, port=options.mail_port, timeout=10
           )
       else:
           smtpObj = smtplib.SMTP(
-              options.mail_host, port=options.mail_port, timeout=5
+              options.mail_host, port=options.mail_port, timeout=10
           )
           smtpObj.starttls()
   except Exception as e:
@@ -38,6 +38,7 @@ def send_email_message(to_addrs, message):
       return
   smtpObj.set_debuglevel(False)
   try:
+    if len(options.mail_username) > 0 and len(options.mail_password) > 0:
       try:
           smtpObj.login(options.mail_username, options.mail_password)
       except smtplib.SMTPNotSupportedError as e:
@@ -45,6 +46,8 @@ def send_email_message(to_addrs, message):
               "SMTP Auth issue (%s). Attempting to send anyway." % e
           )
       smtpObj.send_message(message, from_addr=options.mail_sender, to_addrs=to_addrs)                
+  except Exception as e:
+    logging.warning("SMTP Send issue (%s)." % e)
   finally:
       smtpObj.quit()
 
