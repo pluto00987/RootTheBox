@@ -121,6 +121,31 @@
                     </div>
                 </div>
             </div>
+            <div id="regtoken-grouping" class="control-section">
+                <div class="control-group">
+                    <label class="control-label" for="reuse-regtokens">
+                        <i class="fa fa-check-circle"></i>
+                        {{ _("Reuse Registration Tokens") }}
+                    </label>
+                    <div class="controls">
+                        <input id="reuse-regtokens" name="reuse_regtokens" type="hidden" value="{{ str(config.reuse_regtokens).lower() }}" />
+                        <div id="reuse-regtokens-button" class="btn-group" data-toggle="buttons-radio"
+                            rel="popover"
+                            data-original-title="{{ _('Reuse Registration Tokens') }}"
+                            data-html="true"
+                            data-content="{{ _('Enabling this feature will allow tokens to be used multiple times.  If this option is disabled, tokens are single use.') }}">
+                            <button id="reuse-regtokens-enable" type="button" class="btn btn-success">
+                                <i id="reuse-regtokens-enable-icon" class="fa fa-fw fa-square-o"></i>
+                                {{ _("Enable") }}
+                            </button>
+                            <button id="reuse-regtokens-disable" type="button" class="btn btn-danger">
+                                <i id="reuse-regtokens-disable-icon" class="fa fa-fw fa-square-o"></i>
+                                {{ _("Disable") }}
+                            </button>
+                        </div>
+                    </div>
+                </div>             
+            </div>
             <div class="control-group">
                     <label class="control-label" for="global-notifications">
                         <i class="fa fa-list-alt"></i>

@@ -446,10 +446,13 @@ class RegistrationHandler(BaseHandler):
     def check_regtoken(self):
         regtoken = self.get_argument("token", "")
         token = RegistrationToken.by_value(regtoken)
-        if token is not None and not token.used:
-            token.used = True
-            self.dbsession.add(token)
-            self.dbsession.commit()
+        if token is not None:
+            if not token.used:
+                token.used = True
+                self.dbsession.add(token)
+                self.dbsession.commit()
+            elif not self.config.reuse_regtokens:
+                raise ValidationError("Registration token already used")
         else:
             raise ValidationError("Invalid registration token")
 

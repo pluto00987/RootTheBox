@@ -726,6 +726,14 @@ define(
 )
 
 define(
+    "reuse_regtokens",
+    default=False,
+    group="game",
+    help="allow registration tokens to be (re)used multiple times",
+    type=bool,
+)
+
+define(
     "require_email",
     default=True,
     group="game",

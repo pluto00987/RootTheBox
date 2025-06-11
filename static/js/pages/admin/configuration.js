@@ -28,6 +28,9 @@ $(document).ready(function() {
     if ($("#require-email").val() === "false") {
         $("#email-grouping").hide();
     }
+    if ($("#restrict-registration").val() === "false") {
+        $("#regtoken-grouping").hide();
+    }
     if ($("#teams").val() === "false") {
         $("#team-grouping").hide();
     }
@@ -70,6 +73,14 @@ $(document).ready(function() {
     } else {
         $("#restrict-registration-disable-icon").removeClass("fa-square-o");
         $("#restrict-registration-disable-icon").addClass("fa-check-square-o");
+    }
+
+    if ($("#reuse-regtokens").val() === "true") {
+        $("#reuse-regtokens-enable-icon").removeClass("fa-square-o");
+        $("#reuse-regtokens-enable-icon").addClass("fa-check-square-o");
+    } else {
+        $("#reuse-regtokens-disable-icon").removeClass("fa-square-o");
+        $("#reuse-regtokens-disable-icon").addClass("fa-check-square-o");
     }
 
     if ($("#global-notifications").val() === "true") {
@@ -205,6 +216,7 @@ $(document).ready(function() {
         $("#restrict-registration-enable-icon").addClass("fa-check-square-o");
         $("#restrict-registration-disable-icon").removeClass("fa-check-square-o");
         $("#restrict-registration-disable-icon").addClass("fa-square-o");
+        $("#regtoken-grouping").slideDown();
     });
     $("#restrict-registration-disable").click(function() {
         $("#restrict-registration").val("false");
@@ -212,6 +224,21 @@ $(document).ready(function() {
         $("#restrict-registration-disable-icon").addClass("fa-check-square-o");
         $("#restrict-registration-enable-icon").removeClass("fa-check-square-o");
         $("#restrict-registration-enable-icon").addClass("fa-square-o");
+        $("#regtoken-grouping").slideUp();
+    });
+    $("#reuse-regtokens-enable").click(function() {
+        $("#reuse-regtokens").val("true");
+        $("#reuse-regtokens-enable-icon").removeClass("fa-square-o");
+        $("#reuse-regtokens-enable-icon").addClass("fa-check-square-o");
+        $("#reuse-regtokens-disable-icon").removeClass("fa-check-square-o");
+        $("#reuse-regtokens-disable-icon").addClass("fa-square-o");
+    });
+    $("#reuse-regtokens-disable").click(function() {
+        $("#reuse-regtokens").val("false");
+        $("#reuse-regtokens-disable-icon").removeClass("fa-square-o");
+        $("#reuse-regtokens-disable-icon").addClass("fa-check-square-o");
+        $("#reuse-regtokens-enable-icon").removeClass("fa-check-square-o");
+        $("#reuse-regtokens-enable-icon").addClass("fa-square-o");
     });
 
     $("#global-notifications-enable").click(function() {
@@ -426,6 +453,7 @@ $(document).ready(function() {
     $("#require-email-button").popover({placement:'right', trigger:'hover'});
     $("#validate-email-button").popover({placement:'right', trigger:'hover'});
     $("#restrict-registration-button").popover({placement:'right', trigger:'hover'});
+    $("#reuse-regtokens-button").popover({placement:'right', trigger:'hover'});
     $("#global-notifications-button").popover({placement:'right', trigger:'hover'});
     $("#public-teams-button").popover({placement:'right', trigger:'hover'});
     $("#show-mvp-button").popover({placement:'right', trigger:'hover'});

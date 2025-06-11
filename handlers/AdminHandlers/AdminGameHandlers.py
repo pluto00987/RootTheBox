@@ -388,6 +388,7 @@ class AdminConfigurationHandler(BaseHandler):
         self.config.restrict_registration = self.get_bool(
             "restrict_registration", False
         )
+        self.config.reuse_regtokens = self.get_bool("reuse_regtokens", False)
         self.config.require_email = self.get_bool("require_email", True)
         self.config.validate_email = self.get_bool("validate_email", False)
         if self.config.validate_email and not len(options.mail_host) > 0:
